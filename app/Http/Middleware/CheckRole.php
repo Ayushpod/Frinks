@@ -16,9 +16,9 @@ class CheckRole
 	 * @param  string  $role
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, ...$role)
     {
-		if (Auth::check() && !$request->user()->hasRole($role)) {
+		if (Auth::check() && !$request->user()->hasAnyRole($role)) {
 			throw new AuthorizationException('You do not have permission to view this page');
 		}
         return $next($request);
