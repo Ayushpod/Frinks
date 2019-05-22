@@ -22,13 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::middleware(['auth', 'role:admin,employee'])->group(function () {
-    Route::get('/me', function () {
-        // Uses first & second Middleware
-		return 'This is test page for the me';
-    });
-
-    Route::get('user/profile', function () {
-        return 'user prfole';
-    });
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+  	Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+    Route::get('/users', 'AdminController@user')->name('admin.users');
 });
