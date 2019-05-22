@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/me', function () {
     return 'here goes test';
-});
+})->middleware('role:admin');
 
 Auth::routes();
 
