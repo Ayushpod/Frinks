@@ -15,10 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/me', function () {
-    return 'here goes test';
-})->middleware(['auth','role:admin,employee']);
+// Route::get('/me', function () {
+//     return 'here goes test';
+// })->middleware(['auth','role:admin,employee']);
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth', 'role:admin,employee'])->group(function () {
+    Route::get('/me', function () {
+        // Uses first & second Middleware
+		return 'This is test page for the me';
+    });
+
+    Route::get('user/profile', function () {
+        return 'user prfole';
+    });
+});
