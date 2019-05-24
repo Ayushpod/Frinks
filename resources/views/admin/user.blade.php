@@ -1,45 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+@extends('layouts.admin')
+
+@section('content')
 
 <div class="container">
-  <h2>Striped Rows</h2>
-  <p>The .table-striped class adds zebra-stripes to a table:</p>            
+  <h2>All Users</h2>
+  <p><form action="">
+		<input type="text" name="search" value="{{$search ? $search : ''}}" placehold="Search">
+		<button type="submit">
+		 Search	
+		</button>
+	</form></p>            
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>@sortablelink('name', 'Name')</th>
+        <th>@sortablelink('email')</th>
+        <th>@sortablelink('active')</th>
+        <th>@sortablelink('verified')</th>
+        <th>@sortablelink('created_at')</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+	  @foreach($users as $user)	
+		  <tr>
+			<td>{{$user->name}}</td>
+			<td>{{$user->email}}</td>
+			<td>{{$user->active? 'Yes' : 'NO'}}</td>
+			<td>{{$user->verified? 'Yes' : 'NO'}}</td>
+			<td>{{$user->created_at}}</td>
+		  </tr>
+		@endforeach
     </tbody>
   </table>
+	  {!! $users->appends(request()->except('page'))->render() !!}
+		<!-- {{ $users->links() }} -->
 </div>
-
-</body>
-</html>
+@endsection
