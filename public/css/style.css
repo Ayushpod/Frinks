@@ -1,0 +1,4 @@
+body{margin:2em;}
+h2 {margin:1em 0;}
+.card a[data-toggle=collapse] {display: block;padding:.75rem 1.25rem;}
+.card .card-header {padding:0;}

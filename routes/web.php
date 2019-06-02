@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth', 'role:employee'])->group(function () {
   	Route::get('/profile', 'ProfileController@index')->name('user.profile');
   	Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+  	Route::post('/profile/profile-pic', 'ProfileController@saveProfilePic')->name('user.profile.pic');
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {

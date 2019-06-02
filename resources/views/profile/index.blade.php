@@ -8,9 +8,40 @@
 		<div class="col-md-3">
 			<div class="text-center">
 				<img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-				
 
-				<a href=""><h6>Upload a different photo...</h6></a>
+				<!-- <a href="">
+					<h6>Upload a different photo...</h6>
+				</a> -->
+				<!-- Button trigger modal -->
+				<a  href="#" class="link" data-toggle="modal" data-target="#profilePicModal">
+					<h6>Upload a different photo...</h6>
+				</a>
+				@error('profile_pic')
+    				<div class="alert alert-danger">{{ $message }}</div>
+				@enderror
+
+				<!-- Modal -->
+				<div class="modal fade" id="profilePicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="{{route('user.profile.pic')}}" method="post" enctype="multipart/form-data">
+									@csrf
+								 	<div class="form-group">
+										<input type="file" class="form-control-file" id="profile_pic" name="profile_pic" >
+								  	</div>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- edit form column -->
@@ -26,9 +57,9 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Name:</label>
 					<div class="col-lg-8">
-						<input class="form-control" type="text"  name="name" value="{{$user->name}}">
+						<input class="form-control" type="text" name="name" value="{{$user->name}}">
 					</div>
-				</div>				
+				</div>
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Email:</label>
 					<div class="col-lg-8">
@@ -86,10 +117,10 @@
 				<div class="form-group">
 					<label class="col-md-3 control-label">Summary</label>
 					<div class="col-md-8">
-    					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 					</div>
 				</div>
-				 <div class="form-group">
+				<div class="form-group">
 					<label for="resume">Upload CV</label>
 					<input type="file" class="form-control-file" id="upload_cv" name="resume">
 				</div>
