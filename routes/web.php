@@ -22,7 +22,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth', 'role:employee'])->group(function () {
+  	Route::get('/profile', 'ProfileController@index')->name('user.profile');
+  	Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+});
+
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
   	Route::get('/dashboard', 'AdminController@index')->name('dashboard');
     Route::get('/users', 'AdminController@user')->name('admin.users');
+    Route::get('/user/detail/{id}', 'AdminController@userDetail')->name('admin.user_detail');
+    Route::get('/user/approve/{id}', 'AdminController@approve')->name('admin.user_approve');
 });

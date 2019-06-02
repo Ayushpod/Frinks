@@ -19,6 +19,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'verified', 'active',
+		'address_1', 'address_2', 'city', 'zip_code', 'country',
+		'contact_number', 'longitude', 'latitude'
+
     ];
 	
 	public $sortable = ['name','email','verified','created_at', 'active'];

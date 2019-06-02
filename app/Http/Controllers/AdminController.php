@@ -30,5 +30,16 @@ class AdminController extends Controller
 		$users = $this->userRepository->getAllUsers($search);
 		return view('admin.user',compact(['users', 'search']));
 	}
+	
+	public function userDetail($id)
+	{
+		$user = $this->userRepository->getUserInfoById($id);
+		return view('admin.user_detail', compact(['user']));
+	}	
+	public function approve($id)
+	{
+		$this->userRepository->approve($id);
+		return redirect(route('admin.users'));
+	}
 
 }

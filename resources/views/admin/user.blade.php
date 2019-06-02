@@ -18,6 +18,7 @@
         <th>@sortablelink('active')</th>
         <th>@sortablelink('verified')</th>
         <th>@sortablelink('created_at')</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
 			<td>{{$user->active? 'Yes' : 'NO'}}</td>
 			<td>{{$user->verified? 'Yes' : 'NO'}}</td>
 			<td>{{$user->created_at}}</td>
+			<td><a href="{{route('admin.user_detail', $user->id)}}">View Detail</a></td>
 		  </tr>
 		@endforeach
     </tbody>
