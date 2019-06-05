@@ -25,10 +25,14 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->string('contact_number');
-            $table->string('longitude');
+            $table->string('longitude')->nullable();
             $table->string('profile_picture')->nullable();
+            $table->string('profile_pic_thumbnail')->nullable();
             $table->string('resume')->nullable();
-            $table->string('latitude');
+            $table->string('latitude')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('job_looking_for')->nullable();
+            $table->string('summary')->nullable();
             $table->boolean('verified');
             $table->boolean('active');
             $table->rememberToken();

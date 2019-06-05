@@ -38,12 +38,13 @@ class UserRepository implements UserRepositoryInterface
 	
 	public function search(array $params)
 	{
-		$user = Auth::user();
-		$latitude     = $user->latitude;
-		$longitude    = $user->longitude;
+		
 		$distance = $params['distance']??null;
 		$sortBy = $params['sortby']??null;
-		$userNearestList = User::when($distance != null || $distance != '', function($query) use($distance, $longitude, $latitude) {
+		$userNearestList = User::when($distance != null || $distance != '', function($query, $distance, $longitude = null, $latitude = null) {
+			$user = Auth::user();
+			$latitude     = $user->latitude;
+			$longitude    = $user->longitude;
 			 $query->where([
                          ['latitude',  '!=', $latitude],
                          ['longitude', '!=', $longitude]

@@ -17,14 +17,12 @@
 							<div class="card-header" id="headingOne-{{$user->id}}">
 								<div class="row p-3">
 									<div class="col-4 img-center">
-										<img src="{{asset('storage/profile/thumbnail/10_Screenshot from 2019-05-29 17-17-39.png')}}" class="rounded-circle"/>
+										<img src="<?= asset("storage/profile/thumbnail/$user->profile_pic_thumbnail") ?>" class="rounded-circle"/>
 									</div>
 									<div class="col-4">
 										<ul>
-											<li>test</li>
-											<li>test</li>
-											<li>test</li>
-											<li>test</li>
+											<li>{{$user->name}}</li>
+											<li>{{$user->address_1}}, {{$user->city}}</li>
 										</ul>
 									</div>
 									<div class="col-4">

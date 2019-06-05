@@ -34,8 +34,9 @@ class ProfileController extends Controller
 	
 	public function update(Request $request)
 	{
+		$postData = $request->all();
 		$validator = Validator::make($request->all(), [
-            'resume' => 'required|mimes:pdf|max:2048',
+            'resume' => 'mimes:pdf|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -43,18 +44,15 @@ class ProfileController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
+		
 		$street = $request->get('address_1');
 		$zip_code = $request->get('zip_code');
 		$city = $request->get('city');
 		$country = $request->get('country');
 		$add = $street . ','. $city .','. $country;
 		$add = 'Almada Forum, 2810-354 Almada';
-		dd($this->getLatLonByAddress($add));
-		// $request()->validate([
+		$latlon = $this->getLatLonByAddress($add);
 
-		// 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-		// ]);
 
 		$folder = 'resume/';  
 		if($request->has('resume')) {
@@ -64,26 +62,27 @@ class ProfileController extends Controller
 			$path = $this->upload($resume, $folder, 'public', $resumeName);
 			
         	// $imageName = $resume->storeAs('public/resume/', $request->user()->id .'_'.$resume->getClientOriginalName());
+			$postData['resume'] = $resumeName;
 		}
-		
-		if($request->has('resume')) {
-			// $path = $request->file('avatar')->storeAs('avatars', $request->user()->id);
-			$resume = $request->file('resume');
-			$resumeName = $request->user()->id .'_'.$resume->getClientOriginalName();
-			$path = $this->upload($resume, $folder, 'public', $resumeName);
-			
-        	// $imageName = $resume->storeAs('public/resume/', $request->user()->id .'_'.$resume->getClientOriginalName());
-		}
-		
-		
-		
-
-  
 
         // $request()->image->move(public_path('images'), $imageName);
-		dd($path);
 		$user = Auth::user();
-		
+		$user->name = $postData['name'];
+		$user->email = $postData['email'];
+		$user->address_1 = $postData['address_1'];
+		$user->address_2 = $postData['address_2'];
+		$user->zip_code = $postData['zip_code'];
+		$user->city = $postData['city'];
+		$user->country = $postData['country'];
+		$user->skills = $postData['skills'];
+		$user->job_looking_for = $postData['job_looking_for'];
+		if (!empty($postData['resume'])) {			
+			$user->resume = $postData['resume'];
+		}
+		$user->latitude = $latlon[0]->lat;
+		$user->longitude = $latlon[0]->lon;
+		$user->save();
+		return redirect(route('user.profile'));
 	}
 	
 	public function saveProfilePic(Request $request)
@@ -123,8 +122,10 @@ class ProfileController extends Controller
 
 				//Save to database
 				$user = Auth::user();
-				$user->profile_pic = $path;
-				$user->profile_pic_tumbnail = $destinationPath;
+				if (!empty($profilePicName)){
+					$user->profile_picture = $profilePicName;
+					$user->profile_pic_thumbnail = $profilePicName;
+				}
 				$user->save();
 
 				// $imageName = $resume->storeAs('public/resume/', $request->user()->id .'_'.$resume->getClientOriginalName());

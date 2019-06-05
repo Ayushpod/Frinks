@@ -7,7 +7,8 @@
 		<!-- left column -->
 		<div class="col-md-3">
 			<div class="text-center">
-				<img src="<?= asset("storage/profile/$user->profile_picture") ?>" width="200px" height="200px" class="rounded-circle" alt="avatar">
+				{{$user->profile_picture}}
+				<img src="{{asset('storage/profile/thumbnail/10_Screenshot from 2019-05-29 17-17-39.png')}}" class="rounded-circle" alt="avatar">
 
 				<!-- <a href="">
 					<h6>Upload a different photo...</h6>
