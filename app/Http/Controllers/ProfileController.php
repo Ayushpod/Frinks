@@ -99,7 +99,7 @@ class ProfileController extends Controller
 							->withInput();
 			}
 
-			$folder = 'profile/';  
+			$folder = 'profile';  
 			if($request->has('profile_pic')) {
 				// $path = $request->file('avatar')->storeAs('avatars', $request->user()->id);
 				//Upload original size image
@@ -109,7 +109,7 @@ class ProfileController extends Controller
 
 				$path = $this->upload($profilePic, $folder, 'public', $profilePicName);
 				//Resize Image to 100 by 100
-				$destinationPath = storage_path('/app/public/profile/thumbnail');
+				$destinationPath = storage_path('app/public/profile/thumbnail');
 				if (!file_exists($destinationPath)) {
 					mkdir($destinationPath, 666, true);
 				}
