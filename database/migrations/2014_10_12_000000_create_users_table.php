@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('country');
             $table->string('contact_number');
             $table->string('longitude');
+            $table->string('profile_picture')->nullable();
+            $table->string('resume')->nullable();
             $table->string('latitude');
             $table->boolean('verified');
             $table->boolean('active');

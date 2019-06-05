@@ -13,11 +13,11 @@
 					@endif
 					<div id="accordion">
 						@foreach($users as $user)
-						<div class="card">
+						<div class="card custom-card">
 							<div class="card-header" id="headingOne-{{$user->id}}">
 								<div class="row p-3">
-									<div class="col-4">
-										<img src="https://via.placeholder.com/100" class="rounded-circle"/>
+									<div class="col-4 img-center">
+										<img src="{{asset('storage/profile/thumbnail/10_Screenshot from 2019-05-29 17-17-39.png')}}" class="rounded-circle"/>
 									</div>
 									<div class="col-4">
 										<ul>

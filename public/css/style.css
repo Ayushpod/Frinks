@@ -2,3 +2,10 @@ body{margin:2em;}
 h2 {margin:1em 0;}
 .card a[data-toggle=collapse] {display: block;padding:.75rem 1.25rem;}
 .card .card-header {padding:0;}
+
+.card-custom {
+	margin-bottom:12px !important;
+}
+.img-center {
+	margin:auto 0 !important;
+}
