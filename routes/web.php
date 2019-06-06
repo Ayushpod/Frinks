@@ -22,6 +22,8 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/people', 'HomeController@index')->name('people');
+Route::get('/about', 'HomeController@index')->name('about');
 
 Route::middleware(['auth', 'role:employee'])->group(function () {
   	Route::get('/profile', 'ProfileController@index')->name('user.profile');
