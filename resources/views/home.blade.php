@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('content')
 <main role="main">
 	
-	<section class="jumbotron text-center">
+	<!-- <section class="jumbotron text-center">
 		<div class="container">
 			<h1 class="jumbotron-heading">Album example</h1>
 			<p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
@@ -10,7 +10,7 @@
 				<a href="#" class="btn btn-secondary my-2">Secondary action</a>
 			</p>
 		</div>
-	</section>
+	</section> -->
 
 	<div class="album py-5 bg-light">
 		<div class="container">
@@ -23,7 +23,7 @@
 							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<a href="{{route('user.detail', $user->id)}}" class="btn btn-sm btn-outline-secondary">View {{$user->id}}</a>
+									<a href="{{route('user.detail', $user->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 								<small class="text-muted">{{$user->city }}</small>
 							</div>

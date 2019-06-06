@@ -43,52 +43,55 @@
 <body>
 	<!-- <div id="app"> -->
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
-		<a class="navbar-brand" href="{{route('home')}}">Project Name</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Assignement</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link active" href="{{route('people')}}">Find people
-					<span class="sr-only">(current)</span>
-				</a>
-				<a class="nav-item nav-link" href="{{route('about')}}">About Us</a>
-				<a class="nav-item nav-link" href="#">Pricing</a>
-				<!-- Right Side Of Navbar -->
-                    <ul class="navbarnav mlauto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="navitem">
-                                <a class="navlink" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="navitem">
-                                    <a class="navlink" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="navitem dropdown">
-                                <a id="navbarDropdown" class="navlink dropdowntoggle" href="#" role="button" datatoggle="dropdown" ariahaspopup="true" ariaexpanded="false" vpre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+		<div id="navbarNavDropdown" class="navbar-collapse collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="{{route('home')}}">Home
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{route('about')}}">about</a>
+				</li>
+				<!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li> -->
 
-                                <div class="dropdownmenu dropdownmenuright" arialabelledby="navbarDropdown">
-                                    <a class="dropdownitem" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logoutform').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+			</ul>
+			<ul class="navbar-nav">
+				@guest
 
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url('/login') }}">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url('/register') }}">Register</a>
+				</li>
+				@else
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{{ Auth::user()->name }}
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdownitem" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logoutform').submit();">
+							{{ __('Logout') }}
+						</a>
 
-                                    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-			</div>
+						<form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+							@csrf
+						</form>
+					</div>
+				</li>
+				@endguest
+			</ul>
 		</div>
 	</nav>
 
@@ -101,6 +104,7 @@
 					<h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+					@if (Request::is('/'))
 					<form>
 						<div class="form-row align-items-center">
 							<div class="col-auto">
@@ -119,12 +123,13 @@
 							</div>
 						</div>
 					</form>
+					@endif
 				</div>
 			</div>
 		</div>
 	</header>
-	
-		@yield('content')
+
+	@yield('content')
 	<!-- Footer -->
 	<footer class="footer bg-light">
 		<div class="container">
@@ -132,20 +137,17 @@
 				<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
 					<ul class="list-inline mb-2">
 						<li class="list-inline-item">
-							<a href="#">About</a>
+							<a href="{{route('about')}}">About</a>
 						</li>
 						<li class="list-inline-item">&sdot;</li>
 						<li class="list-inline-item">
 							<a href="#">Contact</a>
 						</li>
-						<li class="list-inline-item">&sdot;</li>
-						<li class="list-inline-item">
-							<a href="#">Terms of Use</a>
-						</li>
-						<li class="list-inline-item">&sdot;</li>
-						<li class="list-inline-item">
+						<!-- <li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item">&sdot;</li> -->
+						<!-- <li class="list-inline-item">
 							<a href="#">Privacy Policy</a>
-						</li>
+						</li> -->
 					</ul>
 					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2019. All Rights Reserved.</p>
 				</div>

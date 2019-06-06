@@ -30,9 +30,11 @@ class CreateUsersTable extends Migration
             $table->string('profile_pic_thumbnail')->nullable();
             $table->string('resume')->nullable();
             $table->string('latitude')->nullable();
-            $table->string('skills')->nullable();
+            $table->text('skills')->nullable();
+            $table->text('price')->nullable();
+            $table->text('gender')->nullable();
             $table->string('job_looking_for')->nullable();
-            $table->string('summary')->nullable();
+            $table->text('summary')->nullable();
             $table->boolean('verified');
             $table->boolean('active');
             $table->rememberToken();

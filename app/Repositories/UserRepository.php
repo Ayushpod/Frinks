@@ -41,6 +41,7 @@ class UserRepository implements UserRepositoryInterface
 		
 		$distance = $params['distance']??null;
 		$sortBy = $params['sortby']??null;
+		
 		$userNearestList = User::when($distance != null || $distance != '', function($query, $distance, $longitude = null, $latitude = null) {
 			$user = Auth::user();
 			$latitude     = $user->latitude;
@@ -52,6 +53,13 @@ class UserRepository implements UserRepositoryInterface
                           cos( radians( longitude ) - radians($longitude) ) + sin( radians($latitude) ) * sin( 
                           radians( latitude ) ) ) ) < $distance ")
                      );
+		})->when(count($params) > 0, function($q) use($params) {
+			if (!empty($params['query'])) {
+				$q->where('skills' , 'like', '%'. $params['query'] .'%');
+			}
+			if (!empty($params['city'])) {
+				$q->where('city' , '=', $params['city']);
+			}
 		})
 		->whereHas('roles', function($q){
 			$q->where('name', '=','employee');

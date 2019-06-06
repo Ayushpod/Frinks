@@ -23,9 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-		$params = [];
+		$params['city'] = $request->get('city');
+		$params['query'] = $request->get('query');
+		
 		$users = $this->userRepository->search($params);
 		
         return view('home', compact(['users']));
@@ -34,7 +36,13 @@ class HomeController extends Controller
 	
 	public function detail($id)
 	{
-		$users = [];
-		return view('profile.detail', compact('users'));
+		$user = $this->userRepository->getUserInfoById($id);
+		// dd($user);
+		return view('profile.detail', compact('user'));
+	}
+	
+	public function about()
+	{
+		return view('about');
 	}
 }
