@@ -73,11 +73,26 @@
                 <li>
                     <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
                 </li>
-				@else
-                <li>
-                    <a href="{{ route('logout') }}" class="article">Logout</a>
-                </li>
-				@endguest
+				 @else
+                            <li class="navitem dropdown">
+                                <a id="navbarDropdown" class="navlink dropdowntoggle" href="#" role="button" datatoggle="dropdown" ariahaspopup="true" ariaexpanded="false" vpre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdownmenu dropdownmenuright" arialabelledby="navbarDropdown">
+                                    <a class="dropdownitem" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logoutform').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+
+                                    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
             </ul>
         </nav>
 

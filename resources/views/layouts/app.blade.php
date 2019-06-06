@@ -55,11 +55,39 @@
 				</a>
 				<a class="nav-item nav-link" href="{{route('about')}}">About Us</a>
 				<a class="nav-item nav-link" href="#">Pricing</a>
-				@guest
+				<!-- Right Side Of Navbar -->
+                    <ul class="navbarnav mlauto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="navitem">
+                                <a class="navlink" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="navitem">
+                                    <a class="navlink" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="navitem dropdown">
+                                <a id="navbarDropdown" class="navlink dropdowntoggle" href="#" role="button" datatoggle="dropdown" ariahaspopup="true" ariaexpanded="false" vpre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-				@else
-				<a class="nav-item nav-link" href="{{route('logout')}}">Logout</a>
-				@endguest
+                                <div class="dropdownmenu dropdownmenuright" arialabelledby="navbarDropdown">
+                                    <a class="dropdownitem" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logoutform').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+
+                                    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
 			</div>
 		</div>
 	</nav>
