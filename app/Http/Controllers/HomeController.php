@@ -31,4 +31,10 @@ class HomeController extends Controller
         return view('home', compact(['users']));
 		
     }
+	
+	public function detail($id)
+	{
+		$users = [];
+		return view('profile.detail', compact('users'));
+	}
 }
