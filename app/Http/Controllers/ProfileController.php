@@ -13,6 +13,8 @@ use App\Repositories\UserRepositoryInterface;
 use Validator;
 use Image;
 use Illuminate\Support\Facades\Log;
+use Mail;
+use App\Mail\MailNotify;
 
 class ProfileController extends Controller
 {
@@ -51,7 +53,7 @@ class ProfileController extends Controller
 		$country = $request->get('country');
 		$add = $street . ','. $city .','. $country;
 		$add = 'Almada Forum, 2810-354 Almada';
-		$latlon = $this->getLatLonByAddress($add);
+		// $latlon = $this->getLatLonByAddress($add);
 
 
 		$folder = 'resume/';  
@@ -79,8 +81,8 @@ class ProfileController extends Controller
 		if (!empty($postData['resume'])) {			
 			$user->resume = $postData['resume'];
 		}
-		$user->latitude = $latlon[0]->lat;
-		$user->longitude = $latlon[0]->lon;
+		// $user->latitude = $latlon[0]->lat;
+		// $user->longitude = $latlon[0]->lon;
 		$user->save();
 		return redirect(route('user.profile'));
 	}
@@ -135,7 +137,6 @@ class ProfileController extends Controller
 			Log::error('Something went wrong' . $e->getMessage(), ['id' => $request->user()->id]);
 		}
 	}
-	
 	
  
 }

@@ -78,7 +78,7 @@ class RegisterController extends Controller
     {
 		try {
 			$address = $data['address_1'] . ',' . $data['zip_code']. ',' . $data['city'] .',' .$data['country'];
-			$coordinates = $this->getLatLonByAddress($address);
+			// $coordinates = $this->getLatLonByAddress($address);
 			$user = User::create([
 				'name' => $data['name'],
 				'email' => $data['email'],
@@ -88,8 +88,8 @@ class RegisterController extends Controller
 				'zip_code' => $data['zip_code'],
 				'country' => $data['country'],
 				'contact_number' => $data['contact_number'],
-				'longitude' => $coordinates ? $coordinates[0]->lon : 0,
-				'latitude' => $coordinates ? $coordinates[0]->lat : 0,
+				'longitude' => 0,//$coordinates ? $coordinates[0]->lon : 0,
+				'latitude' => 0,//$coordinates ? $coordinates[0]->lat : 0,
 				'password' => Hash::make($data['password']),
 				'verified' => 0,
 				'active' => 0,

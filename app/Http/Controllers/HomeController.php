@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
+use Mail;
+use App\Mail\MailNotify;
 
 class HomeController extends Controller
 {
@@ -45,4 +47,17 @@ class HomeController extends Controller
 	{
 		return view('about');
 	}
+	
+	public function sendEmail(Request $request)
+    {
+      $user = $this->userRepository->getUserInfoById($request->get('id'));
+      Mail::to($user)->send(new MailNotify($request->get('email'), $request->get('message')));
+ 
+      if (Mail::failures()) {
+           return ;
+      }else{
+           return redirect(route('user.detail', ['id' => $user->id]));
+         }
+		
+    }
 }

@@ -25,6 +25,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/people', 'HomeController@index')->name('people');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/detail/{id}', 'HomeController@detail')->name('user.detail');
+Route::post('/sendemail', 'HomeController@sendEmail')->name('user.send.email');
 
 Route::middleware(['auth', 'role:employee'])->group(function () {
   	Route::get('/profile', 'ProfileController@index')->name('user.profile');
